@@ -1,0 +1,4 @@
+﻿  vgeinput.cpp
+C:\Users\HITO\source\repos\World Engine\World Engine\vgeinput.cpp(18,20): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+C:\Users\HITO\source\repos\World Engine\World Engine\vgeinput.cpp(18,17): warning C4244: 'argument' : conversion de 'double' en 'float', perte possible de données
+  World Engine.vcxproj -> C:\Users\HITO\source\repos\World Engine\x64\Release\World Engine.lib

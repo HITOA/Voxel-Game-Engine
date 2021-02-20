@@ -1,0 +1,5 @@
+﻿  vge.cpp
+C:\Users\HITO\source\repos\World Engine\World Engine\vge.cpp(6,20): warning C4553: '==' : résultat de l'expression non utilisé ; souhaitiez-vous utiliser '=' ?
+  vgeengine.cpp
+  Génération de code en cours...
+  World Engine.vcxproj -> C:\Users\HITO\source\repos\World Engine\x64\Debug\World Engine.lib
