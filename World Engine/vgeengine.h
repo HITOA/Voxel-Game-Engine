@@ -9,6 +9,7 @@
 #include "transform.h"
 #include "vgetime.h"
 #include "vgeinput.h"
+#include "scenemanager.h"
 //OpenGL related include
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
@@ -28,13 +29,11 @@ public:
 	void CleanUp();
 	void Run();
 	void AddShader(Shader shader);
-	Scene* GetScene();
 private:
 	VgeBehaviour* vgeBehaviour;
 	VgeAppData* vgeAppData;
 	VgeGlfwData* vgeGlfwData;
 	VgeEngineData vgeEngineData;
-	Scene scene;
 	void CompileShaders();
 	void GameLoop();
 	void Draw();

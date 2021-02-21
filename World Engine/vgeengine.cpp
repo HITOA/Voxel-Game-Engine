@@ -20,13 +20,9 @@ void VgeEngine::AddShader(Shader shader)
 	vgeEngineData.shaders.push_back(shader);
 }
 
-Scene* VgeEngine::GetScene()
-{
-	return &scene;
-}
-
 void VgeEngine::CompileShaders()
 {
+	printf("%i\n", vgeEngineData.shaders.size());
 	for (auto& shader : vgeEngineData.shaders) {
 		shader.Init();
 		shader.Compile();
@@ -74,7 +70,7 @@ void VgeEngine::GameLoop() {
 
 void VgeEngine::Draw()
 {
-	Camera* camera = scene.GetCamera();
+	Camera* camera = SceneManager::GetScene()->GetCamera();
 
 	glm::mat4 projection = glm::perspective(glm::radians(camera->fov),
 		(float)vgeAppData->wWidth / (float)vgeAppData->wHeight,
@@ -87,7 +83,7 @@ void VgeEngine::Draw()
 		glm::radians(-camera->transform.rotation.y),
 		glm::radians(-camera->transform.rotation.z)))));
 
-	for (auto& entity : scene) {
+	for (auto& entity : *SceneManager::GetScene()) {
 
 		Transform* transform = nullptr;
 		Drawable* drawable = nullptr;
@@ -127,18 +123,6 @@ void VgeEngine::Draw()
 			glDrawArrays(GL_TRIANGLES, 0, 3);
 		}
 	}
-
-	/*for (auto& mesh : meshes) {
-		vgeEngineData.shaders[0].SetActive();
-		glBindBuffer(GL_ARRAY_BUFFER, mesh.vbo);
-		glVertexAttribPointer(0,
-			3,
-			GL_FLOAT,
-			GL_FALSE,
-			0,
-			(void*)0);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-	}*/
 }
 
 void VgeEngine::CleanUp() {

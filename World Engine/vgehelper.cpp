@@ -2,12 +2,13 @@
 #include "vgehelper.h"
 
 char* VgeHelper::ReadFile(const char* path) {
+	printf("In ReadFile : %s\n", path);
 	std::ifstream file(path, std::ios::binary);
 	char* r;
 	size_t size;
 
 	if (!file.is_open())
-		throw std::runtime_error("Can't open file on ReadFileToString function.");
+		throw std::runtime_error("Can't open file on ReadFile function.");
 
 	file.seekg(0, std::ios::end);
 	size = file.tellg();

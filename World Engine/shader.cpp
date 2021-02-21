@@ -1,8 +1,33 @@
 #include "pch.h"
 #include "shader.h"
 
+Shader::Shader(std::filesystem::path dir)
+{
+	std::filesystem::directory_iterator begin(dir);
+
+	for (auto& file : begin) {
+		std::filesystem::path fileExt = file.path().extension();
+
+		for (int i = 0; i < extensions.size(); i++) {
+			if (fileExt.string().find(extensions[i].first) != std::string::npos) {
+
+				char* path = (char*)malloc(sizeof(char) * file.path().string().size() + 1);
+				memcpy(path, file.path().string().c_str(), sizeof(char) * file.path().string().size() + 1);
+
+				this->passes.push_back(std::make_pair(path, extensions[i].second));
+				break;
+			}
+		}
+	}
+}
+
 void Shader::AddPass(const char* path, int type) {
 	passes.push_back(std::make_pair(path, type));
+}
+
+bool Shader::IsValid()
+{
+	return passes.size() > 1;
 }
 
 void Shader::Init() {
@@ -25,6 +50,8 @@ GLuint Shader::Compile() {
 		unsigned int sID = glCreateShader(pass.second);
 
 		char* source = VgeHelper::ReadFile(pass.first);
+
+		printf("%s\n\nType : %x\n\n", source, pass.second);
 
 		glShaderSource(sID, 1, &source, NULL);
 		glCompileShader(sID);

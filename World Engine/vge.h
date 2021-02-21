@@ -1,5 +1,7 @@
 #pragma once
+#include <iostream>
 #include <stdexcept>
+#include <filesystem>
 
 #include "vgestruct.h"
 #include "vgeinterface.h"
@@ -31,6 +33,6 @@ private:
 	void InitGlfw();
 	void InitGlew();
 	void InitWindow();
-	void InitInterface(VgeBehaviour* vgeBehaviour);
+	//void InitInterface(VgeBehaviour* vgeBehaviour);
 	void InitEngine(VgeBehaviour* vgeBehaviour);
 };

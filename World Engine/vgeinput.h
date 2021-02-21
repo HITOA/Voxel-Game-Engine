@@ -22,4 +22,3 @@ private:
 	static float lastY;
 	static bool mouseLock;
 };
-

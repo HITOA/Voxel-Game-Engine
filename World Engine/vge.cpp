@@ -11,7 +11,7 @@ void VgeApp::Init(VgeBehaviour* vgeBehaviour) {
 	InitGlfw();
 	InitWindow();
 	InitGlew();
-	InitInterface(vgeBehaviour);
+	//InitInterface(vgeBehaviour);
 	InitEngine(vgeBehaviour);
 	HasBeenInit = true;
 }
@@ -83,11 +83,25 @@ void VgeApp::InitGlew() {
 	}
 }
 
-void VgeApp::InitInterface(VgeBehaviour* vgeBehaviour) {
+/*void VgeApp::InitInterface(VgeBehaviour* vgeBehaviour) {
 	vgeInterface->Init(vgeBehaviour, &vgeEngine, &vgeGlfwData);
-}
+}*/
 
 void VgeApp::InitEngine(VgeBehaviour* vgeBehaviour) {
+
+	std::filesystem::path current = std::filesystem::current_path();
+
+	current += "\\Shaders";
+
+	std::filesystem::directory_iterator begin(current);
+
+	for (auto& file : begin) {
+		Shader shader(file.path());
+
+		if (shader.IsValid())
+			vgeEngine.AddShader(shader);
+	}
+
 	vgeEngine.Init(&vgeGlfwData, vgeBehaviour, &vgeAppData);
 }
 
