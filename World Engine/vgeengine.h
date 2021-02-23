@@ -34,6 +34,7 @@ private:
 	VgeAppData* vgeAppData;
 	VgeGlfwData* vgeGlfwData;
 	VgeEngineData vgeEngineData;
+	void EnableGlFeatures();
 	void CompileShaders();
 	void GameLoop();
 	void Draw();

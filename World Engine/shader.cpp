@@ -33,7 +33,11 @@ bool Shader::IsValid()
 void Shader::Init() {
 	glGenVertexArrays(1, &vao);
 	glBindVertexArray(vao);
-	glEnableVertexAttribArray(0);
+
+	glEnableVertexAttribArray(VGE_VERTICES_POSITION);
+	glEnableVertexAttribArray(VGE_COLORS_POSITION);
+	glEnableVertexAttribArray(VGE_NORMALS_POSITION);
+	glEnableVertexAttribArray(VGE_UV_POSITION);
 }
 
 GLuint Shader::Compile() {
@@ -50,8 +54,6 @@ GLuint Shader::Compile() {
 		unsigned int sID = glCreateShader(pass.second);
 
 		char* source = VgeHelper::ReadFile(pass.first);
-
-		printf("%s\n\nType : %x\n\n", source, pass.second);
 
 		glShaderSource(sID, 1, &source, NULL);
 		glCompileShader(sID);
@@ -90,8 +92,6 @@ GLuint Shader::Compile() {
 
 	sIDs.clear();
 
-	mvp = glGetUniformLocation(programId, "MVP");
-
 	return programId;
 }
 
@@ -106,9 +106,4 @@ GLuint Shader::GetProgramId() {
 
 GLuint Shader::GetVAO() {
 	return vao;
-}
-
-GLuint Shader::GetMVP()
-{
-	return mvp;
 }
