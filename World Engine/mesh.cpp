@@ -82,6 +82,55 @@ void Mesh::AddIndice(uint16_t a, uint16_t b, uint16_t c)
 	indicies.push_back(c);
 }
 
+void Mesh::RecalculateNormals()
+{
+	normals.clear();
+	normals.resize(0);
+	normals.resize(vertices.size(), 0);
+
+	for (int i = 0; i < indicies.size(); i += 3) {
+		int vertexIndexA = indicies[i] * 3;
+		int vertexIndexB = indicies[i + 1] * 3;
+		int vertexIndexC = indicies[i + 2] * 3;
+
+		Vector3 triNormal = SurfaceNormalFromIndices(vertexIndexA, vertexIndexB, vertexIndexC);
+
+		normals[vertexIndexA] += triNormal.x;
+		normals[vertexIndexA + 1] += triNormal.y;
+		normals[vertexIndexA + 2] += triNormal.z;
+
+		normals[vertexIndexB] += triNormal.x;
+		normals[vertexIndexB + 1] += triNormal.y;
+		normals[vertexIndexB + 2] += triNormal.z;
+
+		normals[vertexIndexC] += triNormal.x;
+		normals[vertexIndexC + 1] += triNormal.y;
+		normals[vertexIndexC + 2] += triNormal.z;
+	}
+
+	for (int i = 0; i < normals.size(); i += 3) {
+		Vector3 r = Vector3(normals[i], normals[i + 1], normals[i + 2]);
+		r.Normalize();
+		normals[i] = r.x;
+		normals[i + 1] = r.y;
+		normals[i + 2] = r.z;
+	}
+}
+
+Vector3 Mesh::SurfaceNormalFromIndices(int a, int b, int c) {
+	Vector3 pointA = Vector3(vertices[a], vertices[a + 1], vertices[a + 2]);
+	Vector3 pointB = Vector3(vertices[b], vertices[b + 1], vertices[b + 2]);
+	Vector3 pointC = Vector3(vertices[c], vertices[c + 1], vertices[c + 2]);
+
+	Vector3 sideAB = pointB - pointA;
+	Vector3 sideAC = pointC - pointA;
+
+	Vector3 r = Vector3::Cross(sideAB, sideAC);
+	r.Normalize();
+
+	return r;
+}
+
 void Mesh::Update()
 {
 	glBindBuffer(GL_ARRAY_BUFFER, meshVBO);

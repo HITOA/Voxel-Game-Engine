@@ -8,7 +8,7 @@ Transform::Transform()
 	scale.z = 1;
 }
 
-void Transform::Translate(Vector3 translation, Space space = Space::Self)
+void Transform::Translate(Vector3 translation, Space space)
 {
 	if (space == Space::World) {
 		position.x += translation.x;

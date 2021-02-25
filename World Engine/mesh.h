@@ -21,6 +21,8 @@ public:
 	 void AddNormals(Vector3 normal);
 	 void AddUv(Vector3 c);
 	 void AddIndice(uint16_t a, uint16_t b, uint16_t c);
+	 void RecalculateNormals();
+	 Vector3 SurfaceNormalFromIndices(int a, int b, int c);
 	 void Update();
 	 int GetVerticiesBufferSize();
 	 int GetColorsBufferSize();

@@ -24,16 +24,12 @@ class Shader
 public:
 	Shader() {};
 	Shader(std::filesystem::path dir);
-	void Init();
 	void AddPass(const char* path, int type);
 	bool IsValid();
 	GLuint Compile();
-	void SetActive();
 	GLuint GetProgramId();
-	GLuint GetVAO();
 private:
 	GLuint programId = NULL;
-	GLuint vao;
 	std::vector<std::pair<const char*, int>> passes;
 	const std::vector<std::pair<std::string, int>> extensions{std::pair("vs", VGE_VERTEX_SHADER), 
 		std::pair("fs", VGE_FRAGMENT_SHADER), 

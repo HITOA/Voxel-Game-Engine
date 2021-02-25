@@ -3,6 +3,8 @@
 
 #include "shader.h"
 #include "scene.h"
+#include "transform.h"
+#include "drawable.h"
 
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>

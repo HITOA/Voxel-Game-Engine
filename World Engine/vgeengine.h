@@ -34,9 +34,13 @@ private:
 	VgeAppData* vgeAppData;
 	VgeGlfwData* vgeGlfwData;
 	VgeEngineData vgeEngineData;
+	std::vector<std::pair<unsigned int, std::pair<Transform*, Drawable*>>> drawQueue;
+	GLuint batchVBO;
+	GLuint batchIndiciesVBO;
 	void EnableGlFeatures();
 	void CompileShaders();
 	void GameLoop();
 	void Draw();
+	void ComposeDrawQueue();
 };
 

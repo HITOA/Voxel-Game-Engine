@@ -30,16 +30,6 @@ bool Shader::IsValid()
 	return passes.size() > 1;
 }
 
-void Shader::Init() {
-	glGenVertexArrays(1, &vao);
-	glBindVertexArray(vao);
-
-	glEnableVertexAttribArray(VGE_VERTICES_POSITION);
-	glEnableVertexAttribArray(VGE_COLORS_POSITION);
-	glEnableVertexAttribArray(VGE_NORMALS_POSITION);
-	glEnableVertexAttribArray(VGE_UV_POSITION);
-}
-
 GLuint Shader::Compile() {
 	if (programId != NULL)
 		return programId;
@@ -95,15 +85,11 @@ GLuint Shader::Compile() {
 	return programId;
 }
 
-void Shader::SetActive() {
+/*void Shader::SetActive() {
 	glBindVertexArray(vao);
 	glUseProgram(programId);
-}
+}*/
 
 GLuint Shader::GetProgramId() {
 	return programId;
-}
-
-GLuint Shader::GetVAO() {
-	return vao;
 }
